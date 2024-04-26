@@ -1,0 +1,29 @@
+<div style="display:flex;">
+  <div class="editor-container">
+    <editor [(ngModel)]="content" (ngModelChange)="modelChangeFn($event)"
+      apiKey="eiqcpaozvvlntzx2jeenl9h4lvb4aulpaxqd69hpvxkznvlm" [init]="initTiny()"></editor>
+    <div>
+      <button class="save-btn" type="button" (click)="save()">Save</button>
+      <button class="reset-btn" type="button" (click)="reset()">Reset</button>
+      <button class="reset-btn" type="button" (click)="clearAll()">Clear Storage</button>
+    </div>
+  </div>
+  <div class="version-container">
+
+    @if(contentArr.length>0){
+    <h1>Show Versions</h1>
+    <ul (click)="getItemClick($event)">
+      @for(content of contentArr; track content.id){
+      <li [id]="content.id">{{content.timestamp | date : 'short'}}</li>
+      }
+    </ul>
+    }
+
+    @if(displayChangedContent!=''){
+    <h1>Show Changes</h1>
+    @if(displayChangedContent){
+    <div [innerHTML]="displayChangedContent"></div>
+    }
+    }
+  </div>
+</div>
